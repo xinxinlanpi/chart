@@ -1,0 +1,90 @@
+[
+    {
+        "_id": "5e5caf028bbad4b05ac43759",
+        "avatar": "require('../assets/1.jpg')",
+        "time": "1612062014782",
+        "type": "text",
+        "content": "aaaaaa",
+        "obsUserId": "1",
+        "userName": "花花",
+        "userType": "custorm",
+        "operation": "receive"
+    },
+    {
+        "_id": "5e5caf028bbad4b05ac43758",
+        "url": "https://xinxinlanpi.github.io/img/home-bg.jpg",
+        "time": "1612062014783",
+        "type": "img",
+        "content": "aaaaaa",
+        "obsUserId": "1",
+        "userName": "花花",
+        "userType": "custorm",
+        "operation": "receive"
+    },
+    {
+        "_id": "5e5caf028bbad4b05ac43757",
+        "time": "1612062014784",
+        "type": "text",
+        "content": "杰伦加入群聊",
+        "obsUserId": "system",
+        "userType": "system",
+        "operation": "receive"
+    },
+    {
+        "_id": "5e5caf028bbad4b05ac43756",
+        "avatar": "require('../assets/1.jpg')",
+        "time": "1612062018345",
+        "type": "text",
+        "content": "bbb",
+        "obsUserId": "2",
+        "userName": "杰伦",
+        "userType": "custorm",
+        "operation": "receive"
+    },
+    {
+        "_id": "5e5caf028bbad4b05ac43755",
+        "avatar": "require('../assets/1.jpg')",
+        "time": "1612062019589",
+        "type": "text",
+        "content": "ccc",
+        "obsUserId": "0",
+        "userName": "新新",
+        "userType": "self",
+        "operation": "receive"
+    },
+    {
+        "_id": "5e5caf028bbad4b05ac43754",
+        "url": "https://xinxinlanpi.github.io/img/avatar.png",
+        "time": "1612062019590",
+        "type": "img",
+        "content": "ccc",
+        "obsUserId": "0",
+        "userName": "新新",
+        "userType": "self",
+        "operation": "receive"
+    },
+    {
+        "_id": "5e5caf028bbad4b05ac43753",
+        "url": "/static/media/eva.291d0def.jpg",
+        "time": "1612062019595",
+        "type": "text",
+        "content":"sssss",
+        "obsUserId": "0",
+        "userName": "新新",
+        "userType": "self",
+        "operation": "send"
+    },
+    {
+        "_id": "5e5caf028bbad4b05ac43752",
+        "url": "/static/media/eva.291d0def.jpg",
+        "time": "1612062019597",
+        "type": "text",
+        "content": "ccc",
+        "obsUserId": "0",
+        "userType": "system",
+        "operation": "cancel",
+        "cancelUserId": "5e5caf028bbad4b05ac43755",
+        "cancelUserName": "新新"
+    }
+    
+]

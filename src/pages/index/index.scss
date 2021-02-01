@@ -1,0 +1,55 @@
+.my-homewok {
+    display: flex;
+    height: 100vh;
+    .my-homewok-content {
+        flex:1;
+        background-color: antiquewhite;
+        padding: 20px;
+        justify-content: center;
+        display: flex;
+        
+
+        .chartList-content{
+            border: 1px solid #aeb2b7;
+            width: 50%;
+            height: 100%;
+            display: flex;
+            border-radius: 10px;
+            flex-direction: column;
+            // background-image: url(../../assets/banner.jpg)
+            // background-image: url(../../assets/h25.jpg)
+            // background-image: url(../../assets/eva.jpg)
+        }
+        .chart-item-row {
+            padding: 10px;
+
+            .text {
+              display: inline-block;
+              padding: 10px;
+              border-radius: 10px;
+            }
+
+            &.custorm {
+                .text {
+                    background-color: #aeb2b7;
+                }
+
+            }
+            &.system {
+                text-align: center;
+                .text {
+                    background-color: #3333331f;
+                    border-radius: 0;
+                }
+            }
+            &.self {
+                text-align: right;
+                .text {
+                    background-color: #9ada7d;
+                }
+                
+            }
+        }
+    }
+
+}
