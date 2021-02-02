@@ -1,23 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { TextMsg } from './TextMsg';
-import { ImgMsg } from './ImgMsg';
+import { Msg, TextMsg, ImgMsg, IMsgItem } from './Msg';
+import { Op, SendOp, ReceiveOp, CancelOp } from './Op';
 
-
-export interface IChartItem {
-    _id: string;
-    avatar: string;
-    time: string;
-    type: string;
-    content: string;
-    obsUserId: string;
-    userType: string;
-    url: string;
-    operation: string,
-    cancelUserId: string,
-    cancelUserName: string
-}
 
 export enum InfoType {
     img = 'img',
@@ -26,15 +12,21 @@ export enum InfoType {
     video = 'video'
 }
 
+export enum OpType {
+    send = 'send',
+    receive = 'receive',
+    cancel = 'cancel'
+}
+
 export default function ChartListV2() {
-    const [, setList] = useState<IChartItem[]>([]);
+    const [list, setList] = useState<IMsgItem[]>([]);
     const [dom, setDom] = useState<any>([]);
 
 
     const getList = () => {
         axios.get('/items')
             .then(function (response) {
-                setList(response.data as IChartItem[]);
+                setList(response.data as IMsgItem[]);
                 process(response.data);
             })
             .catch(function (error) {
@@ -42,19 +34,23 @@ export default function ChartListV2() {
             });
     }
 
-    const process = (list: IChartItem[]) => {
+    const process = (list: IMsgItem[]) => {
         //@ts-ignore
         let res = [];
         let res2 = new Map();
         list.map((item) => {
             const baseMsg = msgFactory(item);
-            if (item.operation === 'cancel') {
-                res2.set(item.cancelUserId, baseMsg?.cancel());
-            } else {
-                res2.set(item._id, baseMsg?.display());
-            }
+            const op = opFactory(item);
+            const ret = op.visit(baseMsg);
 
+            if (op instanceof CancelOp) {
+                res2.set(item.cancelUserId, ret);
+                return;
+            }
+            res2.set(item._id, ret);
         })
+
+        // console.log("map: ", res2);
 
         for (let value of res2.values()) {
             res.push(value);
@@ -63,7 +59,7 @@ export default function ChartListV2() {
         setDom(res);
     }
 
-    const msgFactory = (item: IChartItem) => {
+    const msgFactory = (item: IMsgItem) => {
 
         switch (item.type) {
             case InfoType.text:
@@ -72,7 +68,21 @@ export default function ChartListV2() {
                 return new ImgMsg(item);
             default:
                 console.log("unknown msg type");
-                return null;
+                return new Msg(item);
+        }
+    }
+
+    const opFactory = (item: IMsgItem) => {
+        switch (item.operation) {
+            case OpType.receive:
+                return new ReceiveOp();
+            case OpType.send:
+                return new SendOp();
+            case OpType.cancel:
+                return new CancelOp()
+            default:
+                console.log("unknown op type");
+                return new Op();
         }
     }
 
@@ -82,12 +92,7 @@ export default function ChartListV2() {
 
     return (
         <div className="chartList-content">
-            {/* {list.map((item: IChartItem, key) =>
-                <ChartItem data={item} key={key} />
-            )} */}
-            {
-                dom
-            }
+            {dom}
         </div>
     );
 }
